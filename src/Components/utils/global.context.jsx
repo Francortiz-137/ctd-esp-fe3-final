@@ -5,12 +5,16 @@ import axios from 'axios';
 export const initialState = {
   theme: 'light', // Puedes iniciar con 'light' o 'dark'
   data: [], // Información traída de la API
+  favs: [], // Estado para los favoritos
 };
 
 // Acciones del reducer
 const actionTypes = {
   TOGGLE_THEME: 'TOGGLE_THEME',
   SET_DATA: 'SET_DATA',
+  ADD_FAV: 'ADD_FAV',
+  REMOVE_FAV: 'REMOVE_FAV',
+  SET_FAVS_FROM_STORAGE: 'SET_FAVS_FROM_STORAGE',
 };
 
 // Reducer para manejar el estado
@@ -25,6 +29,25 @@ const reducer = (state, action) => {
       return {
         ...state,
         data: action.payload,
+      };
+      case actionTypes.ADD_FAV:
+      const updatedFavsAdd = [...state.favs, action.payload];
+      localStorage.setItem('favs', JSON.stringify(updatedFavsAdd));
+      return {
+        ...state,
+        favs: updatedFavsAdd,
+      };
+    case actionTypes.REMOVE_FAV:
+      const updatedFavsRemove = state.favs.filter(fav => fav.id !== action.payload.id);
+      localStorage.setItem('favs', JSON.stringify(updatedFavsRemove));
+      return {
+        ...state,
+        favs: updatedFavsRemove,
+      };
+    case actionTypes.SET_FAVS_FROM_STORAGE:
+      return {
+        ...state,
+        favs: action.payload,
       };
     default:
       return state;
@@ -47,6 +70,11 @@ export const ContextProvider = ({ children }) => {
       .catch(error => console.error(error));
   }, []);
 
+  useEffect(() => {
+    const savedFavs = JSON.parse(localStorage.getItem('favs')) || [];
+    dispatch({ type: actionTypes.SET_FAVS_FROM_STORAGE, payload: savedFavs });
+  }, []);
+  
   // Memoizar el contexto para evitar renders innecesarios
   const value = useMemo(() => ({ state, dispatch }), [state]);
 
