@@ -1,17 +1,33 @@
-import React from 'react'
-import Card from '../Components/Card'
+import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import axios from 'axios';
 
-//Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
+// Este componente deberá ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Home = () => {
+  const [dentists, setDentists] = useState([]);
+
+  useEffect(() => {
+    axios.get('https://jsonplaceholder.typicode.com/users')
+      .then(response => setDentists(response.data))
+      .catch(error => console.error(error));
+  }, []);
+
   return (
-    <main className="" >
-      <h1>Home</h1>
-      <div className='card-grid'>
-        {/* Aqui deberias renderizar las cards */}
+    <div>
+      <h1>Our Dentists</h1>
+      <div className="card-grid">
+        {dentists.map(dentist => (
+          <div key={dentist.id} className="dentist-card">
+            <h2>{dentist.name}</h2>
+            <p>{dentist.email}</p>
+            <p>{dentist.phone}</p>
+            <Link to={`/details/${dentist.id}`}>View Details</Link>
+          </div>
+        ))}
       </div>
-    </main>
-  )
+    </div>
+  );
 }
 
-export default Home
+export default Home;
