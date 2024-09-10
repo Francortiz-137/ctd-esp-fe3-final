@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { useParams } from 'react-router-dom'
 import axios from 'axios';
+import { GlobalContext } from '../Components/utils/global.context'; // Ajusta la ruta según corresponda
 
 
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
@@ -8,6 +9,7 @@ import axios from 'axios';
 const Detail = () => {
  
   const params = useParams();
+  const { state } = useContext(GlobalContext);
   const [dentist, setDentist] = useState(null);
   // Consumiendo el parametro dinamico de la URL deberan hacer un fetch a un user en especifico
 
@@ -22,7 +24,7 @@ const Detail = () => {
   }
 
   return (
-    <>
+    <div className={`detail ${state.theme}`}>
       <h1>Detail Dentist {params.id}</h1>
       {/* aqui deberan renderizar la informacion en detalle de un user en especifico */}
       {/* Deberan mostrar el name - email - phone - website por cada user en especifico */}
@@ -32,7 +34,7 @@ const Detail = () => {
         <p><strong>Phone:</strong> {dentist.phone}</p>
         <p><strong>Website:</strong> <a href={`http://${dentist.website}`} target="_blank" rel="noopener noreferrer">{dentist.website}</a></p>
       </div>
-    </>
+    </div>
   )
 }
 

@@ -1,10 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React,  { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import { GlobalContext } from '../Components/utils/global.context'; // Ajusta la ruta según corresponda
 import axios from 'axios';
-
+import Card from '../Components/Card';
 // Este componente deberá ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Home = () => {
+  const { state } = useContext(GlobalContext);
   const [dentists, setDentists] = useState([]);
 
   useEffect(() => {
@@ -14,16 +16,11 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className={`home ${state.theme}`}>
       <h1>Our Dentists</h1>
       <div className="card-grid">
         {dentists.map(dentist => (
-          <div key={dentist.id} className="dentist-card">
-            <h2>{dentist.name}</h2>
-            <p>{dentist.email}</p>
-            <p>{dentist.phone}</p>
-            <Link to={`/details/${dentist.id}`}>View Details</Link>
-          </div>
+          <Card key={dentist.id} className="dentist-card" />
         ))}
       </div>
     </div>
