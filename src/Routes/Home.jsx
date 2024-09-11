@@ -1,10 +1,9 @@
-import React,  { useContext, useEffect, useState } from 'react';
-import { GlobalContext } from '../Components/utils/global.context'; // Ajusta la ruta según corresponda
+import React, { useContext, useEffect, useState } from 'react';
+import { GlobalContext } from '../Components/utils/global.context';
 import axios from 'axios';
 import Card from '../Components/Card';
 import Grid from '@mui/material/Grid2';
 import { Typography } from '@mui/material';
-// Este componente deberá ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Home = () => {
   const { state } = useContext(GlobalContext);
@@ -17,24 +16,47 @@ const Home = () => {
   }, []);
 
   return (
-    <Grid container className={`home ${state.theme}`}>
-      <Grid size={{xs: 12}} >
-        <Typography variant="h4" 
-        component="h1" 
-        textAlign="center" 
-        mt={10}
-        gutterBottom>
+    <Grid
+      container
+      spacing={2}
+      sx={{
+        minHeight: '100vh',
+        padding: '20px',
+        backgroundColor: state.theme === 'light' ? '#f0f0f0' : '#333',
+        color: state.theme === 'light' ? '#000' : '#fff'
+      }}
+    >
+      <Grid
+        size={{ xs: 12 }}
+      >
+        <Typography
+          variant="h4"
+          component="h1"
+          textAlign="center"
+          mt={4}
+          gutterBottom
+          sx={{ color: state.theme === 'light' ? '#000' : '#fff' }}
+        >
           Our Dentists
         </Typography>
       </Grid>
-      <Grid container 
-        size={{xs: 12}}
-        spacing={2}>
+      <Grid
+        container
+        rowSpacing={4} columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+        
+      >
         {dentists.map((dentist) => (
-          <Grid 
-            size={{xs: 12, sm:6, md:4}}
-            key={dentist.id}>
-            <Card dentist={dentist} className="dentist-card" />
+          <Grid
+            size={{ xs: 12, sm: 6, md: 4 }}
+            key={dentist.id}
+            sx={{
+              display: 'flex',
+              justifyContent: 'center'
+            }}
+          >
+            <Card
+              dentist={dentist}
+            />
           </Grid>
         ))}
       </Grid>

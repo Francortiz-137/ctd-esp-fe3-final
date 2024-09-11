@@ -9,16 +9,16 @@ import { Container } from '@mui/material';
 
 const Detail = () => {
  
-  const params = useParams();
+  const { id } = useParams();
   const { state } = useContext(GlobalContext);
-  const [dentist, setDentist] = useState(null);
+  const [dentist, setDentist] = useState({});
   // Consumiendo el parametro dinamico de la URL deberan hacer un fetch a un user en especifico
 
   useEffect(() => {
-    axios.get(`https://jsonplaceholder.typicode.com/users/${params.id}`)
+    axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
       .then(response => setDentist(response.data))
       .catch(error => console.error(error));
-  }, [params.id]);
+  }, [id]);
 
   if (!dentist) {
     return <p>Loading...</p>;
@@ -27,7 +27,7 @@ const Detail = () => {
   return (
     <Container mt={0}>
         <div className={`detail ${state.theme}`}>
-      <h1>Detail Dentist {params.id}</h1>
+      <h1>Detail Dentist {id}</h1>
       {/* aqui deberan renderizar la informacion en detalle de un user en especifico */}
       {/* Deberan mostrar el name - email - phone - website por cada user en especifico */}
       <div className="dentist-info">
