@@ -74,8 +74,8 @@ export const ContextProvider = ({ children }) => {
     const savedFavs = JSON.parse(localStorage.getItem('favs')) || [];
     dispatch({ type: actionTypes.SET_FAVS_FROM_STORAGE, payload: savedFavs });
   }, []);
-  
-  // Memoizar el contexto para evitar renders innecesarios
+
+  // Memorizar el contexto para evitar renders innecesarios
   const value = useMemo(() => ({ state, dispatch }), [state]);
 
   return (
