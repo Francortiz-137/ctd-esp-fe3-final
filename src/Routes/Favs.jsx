@@ -1,7 +1,8 @@
 import React, { useContext, useState, useEffect } from 'react';
 import { GlobalContext } from '../Components/utils/global.context'; // Ajusta la ruta según corresponda
 import Card from "../Components/Card";
-
+import Grid from '@mui/material/Grid2';
+import { Typography } from '@mui/material';
 //Este componente debera ser estilado como "dark" o "light" dependiendo del theme del Context
 
 const Favs = () => {
@@ -16,20 +17,31 @@ const Favs = () => {
 
   return (
     <>
-     <div className={`favs ${state.theme}`}>
-      <h1>Dentists Favs</h1>
-      <div className="card-grid">
+     <Grid container className={`favs ${state.theme}`}>
+     <Grid size={{xs: 12}} >
+        <Typography variant="h4" 
+        component="h1" 
+        textAlign="center" 
+        mt={10}
+        gutterBottom>
+          Dentists Favs
+        </Typography>
+      </Grid>
+      <Grid container 
+        size={{xs: 12}}
+        spacing={2}>
         {/* este componente debe consumir los destacados del localStorage */}
         {/* Deberan renderizar una Card por cada uno de ellos */}
         {favDentists.map(dentist => (
-          <div key={dentist.id} className={`dentist-card ${state.theme}`}>
-            <h2>{dentist.name}</h2>
-            <p>{dentist.email}</p>
-            <p>{dentist.phone}</p>
-          </div>
+          <Grid 
+          size={{xs: 12, sm:6, md:4}}
+          key={dentist.id}>
+            <Card key={dentist.id} dentist={dentist} 
+            className={`dentist-card ${state.theme}`}/>
+          </Grid>
         ))}
-      </div>
-     </div>
+      </Grid>
+     </Grid>
     </>
   );
 };
