@@ -6,27 +6,25 @@ import { useDentistStates } from '../Components/utils/global.context';
 
 const Detail = () => {
   const { id } = useParams();
-  const { state } = useDentistStates();
+  const { state } = useDentistStates(); // estado traido del contexto para manejar el tema
   const [dentist, setDentist] = useState({});
-  const [error, setError] = useState('');
-  const [loading, setLoading] = useState(true); // Nuevo estado para controlar la carga
+  const [error, setError] = useState(''); // estado para manejar los errores
+  const [loading, setLoading] = useState(true); // Nuevo estado para controlar el loading
 
 
   // Consumiendo el parámetro dinámico de la URL, se hará un fetch a un usuario específico
   useEffect(() => {
 
     setLoading(true);
-    // Fetch data from API
+    // Obtener data desde la API
     axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
       .then(response => {
-        // Set the fetched data and clear error
         setDentist(response.data);
         setError('');
-        // Set loading to false after 2 seconds
+        // desactivar la carga despues de 2 seg
         setTimeout(() => setLoading(false), 2000);
       })
       .catch(error => {
-        // Handle errors and clear loading state
         setDentist(null);
         setError(error.message);
         setLoading(false);

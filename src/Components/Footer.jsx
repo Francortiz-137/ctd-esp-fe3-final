@@ -15,7 +15,7 @@ const Footer = () => {
         color: state.theme === 'dark' ? '#fff' : '#000',
         display: 'flex',
         flexDirection: { xs: 'column', sm: 'row' }, 
-        justifyContent: { xs: 'center', sm: 'space-between' }, // En xs, centrar contenido; en sm, espacio entre
+        justifyContent: { xs: 'center', sm: 'space-between' },
         alignItems: 'center',
         padding: 2,
         marginTop: 0,

@@ -25,7 +25,7 @@ const Contact = () => {
       <Grid 
         size={{xs:12, sm:8, md:6}} 
         sx={{ 
-          px: { xs: 2, sm: 0 }, // Añade margen horizontal en xs, sin margen en sm y mayores
+          px: { xs: 2, sm: 0 },
         }}
       >
         <Form onSubmitSuccess={handleFormSubmitSuccess} />
