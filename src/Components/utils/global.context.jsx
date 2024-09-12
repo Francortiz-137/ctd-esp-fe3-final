@@ -3,7 +3,7 @@ import axios from 'axios';
 
 // Estado inicial del contexto
 export const initialState = {
-  theme: 'light', // Puedes iniciar con 'light' o 'dark'
+  theme: 'light', // Tema inicial
   data: [], // Información traída de la API
   favs: [], // Estado para los favoritos
 };

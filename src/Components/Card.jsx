@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { routes } from '../utils/routes';
 import { GlobalContext } from '../Components/utils/global.context';
 import { Link } from "react-router-dom";
 import { Button, Typography, Card as MuiCard, CardActions, CardContent, CardMedia, Box } from '@mui/material';
@@ -26,7 +27,7 @@ const Card = ({ dentist }) => {
           minWidth: 290
         }}>
       <Link 
-      to={`/details/${dentist.id}`} 
+      to={`${routes.detail}/${dentist.id}`} 
       style={{ textDecoration: 'none' }}
     >
       <MuiCard 

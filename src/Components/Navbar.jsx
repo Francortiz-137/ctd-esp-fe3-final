@@ -29,7 +29,8 @@ const Navbar = () => {
         position="sticky" 
         sx={{ 
           backgroundColor: state.theme === 'light' ? '#f5f5f5' : '#333',
-          color: state.theme === 'light' ? '#000' : '#fff'
+          color: state.theme === 'light' ? '#000' : '#fff',
+          height: '6vh',
         }}
       >
         <Toolbar>

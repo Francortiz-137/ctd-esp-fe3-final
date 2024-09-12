@@ -18,7 +18,7 @@ const Contact = () => {
       justifyContent="center"
       alignItems="center"
       style={{
-        minHeight: '100vh',
+        minHeight: '85vh', 
         backgroundColor: state.theme === 'light' ? '#f5f5f5' : '#333',
       }}
     >

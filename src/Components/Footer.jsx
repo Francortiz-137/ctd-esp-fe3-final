@@ -12,16 +12,15 @@ const Footer = () => {
     <Box
       component="footer"
       sx={{
-        backgroundColor: state.theme === 'dark' ? '#333' : '#fff',
+        backgroundColor: state.theme === 'dark' ? '#444' : '#fff',
         color: state.theme === 'dark' ? '#fff' : '#000',
         display: 'flex',
-        flexDirection: { xs: 'column', sm: 'row' }, // En xs, columna; en sm y mayores, fila
+        flexDirection: { xs: 'column', sm: 'row' }, 
         justifyContent: { xs: 'center', sm: 'space-between' }, // En xs, centrar contenido; en sm, espacio entre
         alignItems: 'center',
         padding: 2,
-        mt: 4,
-        // Asegúrate de que el margen superior del footer no sea el problema
         marginTop: 0,
+        minHeight: '9vh',
       }}
     >
       <Box
