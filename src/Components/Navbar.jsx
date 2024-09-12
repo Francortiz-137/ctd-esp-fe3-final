@@ -1,12 +1,12 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { routes } from '../utils/routes';
-import { GlobalContext } from '../Components/utils/global.context';
+import { useDentistStates } from '../Components/utils/global.context';
 import { AppBar, Toolbar, Typography, Button, IconButton, Container, Menu, MenuItem } from '@mui/material';
 import { LightMode, DarkMode, Menu as MenuIcon } from '@mui/icons-material';
 
 const Navbar = () => {
-  const { state, dispatch } = useContext(GlobalContext);
+  const { state, dispatch } = useDentistStates();
   const [anchorEl, setAnchorEl] = useState(null);
 
   const toggleTheme = () => {
@@ -28,7 +28,7 @@ const Navbar = () => {
       <AppBar 
         position="sticky" 
         sx={{ 
-          backgroundColor: state.theme === 'light' ? '#f5f5f5' : '#333',
+          backgroundColor: state.theme === 'light' ? '#f5f5f5' : '#1e1e1e',
           color: state.theme === 'light' ? '#000' : '#fff',
           height: '6vh',
         }}
@@ -42,8 +42,10 @@ const Navbar = () => {
             }}
           >
             <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
-              <span style={{ color: 'red' }}>D</span>H <span style={{ fontWeight: '400' }}>ODONTO</span>
+              <span style={{ color: 'red' }}>D</span><span>H</span>
+              <span style={{ fontWeight: '400', paddingLeft: '8px' }}>ODONTO</span>
             </Typography>
+
             <IconButton
               color="inherit"
               edge="start"

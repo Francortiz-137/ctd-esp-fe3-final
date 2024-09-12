@@ -1,9 +1,9 @@
-import React, { useState, useContext } from 'react';
+import { useState } from 'react';
 import { Box, Typography, TextField, Button } from '@mui/material';
-import { GlobalContext } from '../Components/utils/global.context';
+import { useDentistStates } from '../Components/utils/global.context';
 
 const Form = ({ onSubmitSuccess }) => {
-  const { state } = useContext(GlobalContext);
+  const { state } = useDentistStates();
   const [formData, setFormData] = useState({ name: '', email: '' });
   const [errors, setErrors] = useState({ name: '', email: '' });
 

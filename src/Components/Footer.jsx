@@ -1,12 +1,11 @@
-import React, { useContext } from 'react';
 import { Box, Typography, IconButton } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import { GlobalContext } from './utils/global.context';
+import { useDentistStates } from './utils/global.context';
 
 const Footer = () => {
-  const { state } = useContext(GlobalContext);
+  const { state } = useDentistStates();
 
   return (
     <Box
@@ -37,9 +36,12 @@ const Footer = () => {
         </Typography>
         <Box
           component="img"
-          src="./images/DH.png"
+          src="/images/LogoDH.svg"
           alt="DH-logo"
-          sx={{ width: 200 }}
+          sx={{
+            width: 200,
+            filter: state.theme === 'dark' ? 'invert(0)' : 'invert(1)',
+          }}
         />
       </Box>
 
@@ -49,7 +51,6 @@ const Footer = () => {
         justifyContent="center"
         sx={{
           mt: { xs: 2, sm: 0 },
-          // En xs, los iconos están debajo del texto e imagen; en sm y mayores, a la derecha
         }}
       >
         <IconButton color="inherit" href="https://facebook.com">

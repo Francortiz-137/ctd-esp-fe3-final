@@ -1,11 +1,11 @@
-import React, { useContext, useState } from 'react';
-import { GlobalContext } from '../Components/utils/global.context';
+import { useState } from 'react';
+import { useDentistStates } from '../Components/utils/global.context';
 import Form from '../Components/Form'; 
 import Grid from '@mui/material/Grid2';
 import { Typography, Box } from '@mui/material';
 
 const Contact = () => {
-  const { state } = useContext(GlobalContext);
+  const { state } = useDentistStates();
   const [successMessage, setSuccessMessage] = useState('');
 
   const handleFormSubmitSuccess = (message) => {

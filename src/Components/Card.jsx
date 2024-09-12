@@ -1,13 +1,12 @@
-import React, { useContext } from 'react';
 import { routes } from '../utils/routes';
-import { GlobalContext } from '../Components/utils/global.context';
+import { useDentistStates } from '../Components/utils/global.context';
 import { Link } from "react-router-dom";
 import { Button, Typography, Card as MuiCard, CardActions, CardContent, CardMedia, Box } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
 
 const Card = ({ dentist }) => {
-  const { state, dispatch } = useContext(GlobalContext);
+  const { state, dispatch } = useDentistStates();
   const isFav = state.favs.some(fav => fav.id === dentist.id);
 
   const handleToggleFav = (e) => {

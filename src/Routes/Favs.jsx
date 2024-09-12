@@ -1,9 +1,9 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { GlobalContext } from '../Components/utils/global.context';
+import { useEffect, useState } from 'react';
+import { useDentistStates } from '../Components/utils/global.context';
 import DentistList from '../Components/DentistList';
 
 const Favs = () => {
-  const { state } = useContext(GlobalContext);
+  const { state } = useDentistStates();
   const [favDentists, setFavDentists] = useState([]);
 
   useEffect(() => {
@@ -12,6 +12,7 @@ const Favs = () => {
   }, []);
 
   return (
+    /*como la estructura se comparte con Home se crea un nuevo componente */
     <DentistList
       title="Favorite Dentists"
       dentists={favDentists}

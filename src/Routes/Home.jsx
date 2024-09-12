@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
-import { GlobalContext } from '../Components/utils/global.context';
+import { useDentistStates }  from '../Components/utils/global.context';
 import DentistList from '../Components/DentistList';
 
 const Home = () => {
-  const { state } = useContext(GlobalContext);
+  const { state } = useDentistStates();
   const dentists = state.data;
-  
+  console.log(state);
   return (
+    /*como la estructura se repetia con favs se crea un nuevo componente */
     <DentistList
       title="Our Dentists"
       dentists={dentists}

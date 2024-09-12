@@ -30,7 +30,7 @@ const reducer = (state, action) => {
         ...state,
         data: action.payload,
       };
-      case actionTypes.ADD_FAV:
+    case actionTypes.ADD_FAV:
       const updatedFavsAdd = [...state.favs, action.payload];
       localStorage.setItem('favs', JSON.stringify(updatedFavsAdd));
       return {
@@ -85,6 +85,6 @@ export const ContextProvider = ({ children }) => {
   );
 };
 
-export const useCharStates = () => {
+export const useDentistStates = () => {
   return useContext(GlobalContext);
 }

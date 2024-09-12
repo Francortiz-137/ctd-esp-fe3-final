@@ -1,10 +1,9 @@
-import React, { useContext } from 'react';
 import { Box, Typography } from '@mui/material';
-import { GlobalContext } from '../Components/utils/global.context';
+import { useDentistStates } from '../Components/utils/global.context';
 
 const Error = () => {
-  const { state } = useContext(GlobalContext);
-
+  const { state } = useDentistStates();
+  // Pagina de error sencilla para page not found
   return (
     <Box
       sx={{
