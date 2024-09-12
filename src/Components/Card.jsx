@@ -53,10 +53,10 @@ const Card = ({ dentist }) => {
             {dentist.name}
           </Typography>
           <Typography variant="body2" sx={{ color: state.theme === 'light' ? 'text.secondary' : '#cccccc' }}>
-            {dentist.username}
+            {dentist.id}
           </Typography>
           <Typography variant="body2" sx={{ color: state.theme === 'light' ? 'text.secondary' : '#cccccc' }}>
-            {dentist.id}
+            {dentist.username}
           </Typography>
         </CardContent>
         <CardActions>

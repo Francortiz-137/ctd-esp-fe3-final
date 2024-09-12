@@ -15,13 +15,24 @@ const Footer = () => {
         backgroundColor: state.theme === 'dark' ? '#333' : '#fff',
         color: state.theme === 'dark' ? '#fff' : '#000',
         display: 'flex',
-        justifyContent: 'space-between',
+        flexDirection: { xs: 'column', sm: 'row' }, // En xs, columna; en sm y mayores, fila
+        justifyContent: { xs: 'center', sm: 'space-between' }, // En xs, centrar contenido; en sm, espacio entre
         alignItems: 'center',
         padding: 2,
         mt: 4,
+        // Asegúrate de que el margen superior del footer no sea el problema
+        marginTop: 0,
       }}
     >
-      <Box display="flex" alignItems="center">
+      <Box
+        display="flex"
+        flexDirection="row"
+        alignItems="center"
+        sx={{
+          mb: { xs: 2, sm: 0 },
+          textAlign: { xs: 'center', sm: 'left' },
+        }}
+      >
         <Typography variant="body1" sx={{ marginRight: 1 }}>
           Powered by
         </Typography>
@@ -33,7 +44,15 @@ const Footer = () => {
         />
       </Box>
 
-      <Box display="flex">
+      <Box
+        display="flex"
+        flexDirection="row"
+        justifyContent="center"
+        sx={{
+          mt: { xs: 2, sm: 0 },
+          // En xs, los iconos están debajo del texto e imagen; en sm y mayores, a la derecha
+        }}
+      >
         <IconButton color="inherit" href="https://facebook.com">
           <FacebookIcon />
         </IconButton>

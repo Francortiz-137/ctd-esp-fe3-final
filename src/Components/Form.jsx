@@ -1,18 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Box, Typography, TextField, Button } from '@mui/material';
+import { GlobalContext } from '../Components/utils/global.context';
 
 const Form = ({ onSubmitSuccess }) => {
-  // Estado para manejar los campos del formulario y los mensajes de error/success
+  const { state } = useContext(GlobalContext);
   const [formData, setFormData] = useState({ name: '', email: '' });
   const [errors, setErrors] = useState({ name: '', email: '' });
 
-  // Manejar cambios en los campos del formulario
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
-  // Validar el formulario
   const validateForm = () => {
     let valid = true;
     const newErrors = { name: '', email: '' };
@@ -31,20 +30,24 @@ const Form = ({ onSubmitSuccess }) => {
     return valid;
   };
 
-  // Manejar el envío del formulario
   const handleSubmit = (e) => {
     e.preventDefault();
 
     if (validateForm()) {
       console.log('Datos del formulario:', formData);
       onSubmitSuccess(`Gracias ${formData.name}, te contactaremos cuando antes vía mail`);
-      // Limpiar formulario después de éxito
       setFormData({ name: '', email: '' });
     }
   };
 
   return (
-    <Box p={3} boxShadow={3} borderRadius={2} bgcolor="background.paper">
+    <Box
+      p={3}
+      boxShadow={3}
+      borderRadius={2}
+      bgcolor={state.theme === 'dark' ? '#424242' : '#fff'} // Background color based on theme
+      color={state.theme === 'dark' ? '#fff' : '#000'} // Text color based on theme
+    >
       <Typography variant="h4" component="h1" gutterBottom>
         Contacto
       </Typography>
@@ -58,6 +61,22 @@ const Form = ({ onSubmitSuccess }) => {
           helperText={errors.name}
           fullWidth
           margin="normal"
+          sx={{
+            '& .MuiInputBase-root': {
+              color: state.theme === 'dark' ? '#fff' : '#000', // Input text color based on theme
+            },
+            '& .MuiFormLabel-root': {
+              color: state.theme === 'dark' ? '#aaa' : '#555', // Label color based on theme
+            },
+            '& .MuiOutlinedInput-root': {
+              '& fieldset': {
+                borderColor: state.theme === 'dark' ? '#666' : '#ccc', // Border color based on theme
+              },
+              '&:hover fieldset': {
+                borderColor: state.theme === 'dark' ? '#fff' : '#000', // Border color on hover based on theme
+              },
+            },
+          }}
         />
         <TextField
           label="Email"
@@ -68,8 +87,35 @@ const Form = ({ onSubmitSuccess }) => {
           helperText={errors.email}
           fullWidth
           margin="normal"
+          sx={{
+            '& .MuiInputBase-root': {
+              color: state.theme === 'dark' ? '#fff' : '#000', // Input text color based on theme
+            },
+            '& .MuiFormLabel-root': {
+              color: state.theme === 'dark' ? '#aaa' : '#555', // Label color based on theme
+            },
+            '& .MuiOutlinedInput-root': {
+              '& fieldset': {
+                borderColor: state.theme === 'dark' ? '#666' : '#ccc', // Border color based on theme
+              },
+              '&:hover fieldset': {
+                borderColor: state.theme === 'dark' ? '#fff' : '#000', // Border color on hover based on theme
+              },
+            },
+          }}
         />
-        <Button type="submit" variant="contained" color="primary">
+        <Button
+          type="submit"
+          variant="contained"
+          color={state.theme === 'dark' ? 'secondary' : 'primary'} 
+          sx={{
+            mt: 2,
+            bgcolor: state.theme === 'dark' ? '#ff5722' : '#3f51b5', 
+            '&:hover': {
+              bgcolor: state.theme === 'dark' ? '#e64a19' : '#303f9f',
+            },
+          }}
+        >
           Enviar
         </Button>
       </form>
