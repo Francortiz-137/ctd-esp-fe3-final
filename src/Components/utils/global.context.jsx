@@ -11,6 +11,7 @@ export const initialState = {
 // Acciones del reducer
 const actionTypes = {
   TOGGLE_THEME: 'TOGGLE_THEME',
+  SET_DATA: 'SET_DATA',
   ADD_FAV: 'ADD_FAV',
   REMOVE_FAV: 'REMOVE_FAV',
   SET_FAVS_FROM_STORAGE: 'SET_FAVS_FROM_STORAGE',
@@ -23,6 +24,11 @@ const reducer = (state, action) => {
       return {
         ...state,
         theme: state.theme === 'light' ? 'dark' : 'light',
+      };
+    case actionTypes.SET_DATA:
+      return {
+        ...state,
+        data: action.payload,
       };
     case actionTypes.ADD_FAV:
       const updatedFavsAdd = [...state.favs, action.payload];
@@ -52,8 +58,17 @@ const reducer = (state, action) => {
 export const GlobalContext = createContext({});
 
 // Proveedor del contexto global
-export const ContextProvider = ({ children }) => {
+export const Context = ({ children }) => {
   const [state, dispatch] = useReducer(reducer, initialState);
+
+  // Llamada a la API para obtener los datos
+  useEffect(() => {
+    axios.get('https://jsonplaceholder.typicode.com/users')
+      .then(response => {
+        dispatch({ type: actionTypes.SET_DATA, payload: response.data });
+      })
+      .catch(error => console.error(error));
+  }, []);
 
   useEffect(() => {
     const savedFavs = JSON.parse(localStorage.getItem('favs')) || [];

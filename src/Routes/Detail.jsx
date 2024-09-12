@@ -10,14 +10,14 @@ const Detail = () => {
   const [dentist, setDentist] = useState({});
   const [error, setError] = useState(''); // estado para manejar los errores
   const [loading, setLoading] = useState(true); // Nuevo estado para controlar el loading
-
+  const url = `https://jsonplaceholder.typicode.com/users/${id}`;
 
   // Consumiendo el parámetro dinámico de la URL, se hará un fetch a un usuario específico
   useEffect(() => {
 
     setLoading(true);
     // Obtener data desde la API
-    axios.get(`https://jsonplaceholder.typicode.com/users/${id}`)
+    axios.get(url)
       .then(response => {
         setDentist(response.data);
         setError('');
@@ -25,7 +25,7 @@ const Detail = () => {
         setTimeout(() => setLoading(false), 2000);
       })
       .catch(error => {
-        setDentist(null);
+        setDentist({});
         setError(error.message);
         setLoading(false);
         console.error(error);

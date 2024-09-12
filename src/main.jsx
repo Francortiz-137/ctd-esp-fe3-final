@@ -8,16 +8,17 @@ import './index.css';
 import App from './App';
 import { BrowserRouter } from 'react-router-dom';
 import { CssBaseline } from "@mui/material";
+import { Context } from './Components/utils/global.context';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <React.StrictMode>
-    <CssBaseline />
     <BrowserRouter>
+    <CssBaseline />
+    <Context>
       <App/>
+    </Context>
     </BrowserRouter>
-  </React.StrictMode>
 );
 
 

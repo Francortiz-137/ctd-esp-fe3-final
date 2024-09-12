@@ -45,8 +45,8 @@ const Form = ({ onSubmitSuccess }) => {
       p={3}
       boxShadow={3}
       borderRadius={2}
-      bgcolor={state.theme === 'dark' ? '#424242' : '#fff'} // Background color based on theme
-      color={state.theme === 'dark' ? '#fff' : '#000'} // Text color based on theme
+      bgcolor={state.theme === 'dark' ? '#424242' : '#fff'}
+      color={state.theme === 'dark' ? '#fff' : '#000'}
     >
       <Typography variant="h4" component="h1" gutterBottom>
         Contacto
@@ -63,17 +63,17 @@ const Form = ({ onSubmitSuccess }) => {
           margin="normal"
           sx={{
             '& .MuiInputBase-root': {
-              color: state.theme === 'dark' ? '#fff' : '#000', // Input text color based on theme
+              color: state.theme === 'dark' ? '#fff' : '#000',
             },
             '& .MuiFormLabel-root': {
-              color: state.theme === 'dark' ? '#aaa' : '#555', // Label color based on theme
+              color: state.theme === 'dark' ? '#aaa' : '#555',
             },
             '& .MuiOutlinedInput-root': {
               '& fieldset': {
-                borderColor: state.theme === 'dark' ? '#666' : '#ccc', // Border color based on theme
+                borderColor: state.theme === 'dark' ? '#666' : '#ccc',
               },
               '&:hover fieldset': {
-                borderColor: state.theme === 'dark' ? '#fff' : '#000', // Border color on hover based on theme
+                borderColor: state.theme === 'dark' ? '#fff' : '#000',
               },
             },
           }}
@@ -89,17 +89,17 @@ const Form = ({ onSubmitSuccess }) => {
           margin="normal"
           sx={{
             '& .MuiInputBase-root': {
-              color: state.theme === 'dark' ? '#fff' : '#000', // Input text color based on theme
+              color: state.theme === 'dark' ? '#fff' : '#000',
             },
             '& .MuiFormLabel-root': {
-              color: state.theme === 'dark' ? '#aaa' : '#555', // Label color based on theme
+              color: state.theme === 'dark' ? '#aaa' : '#555',
             },
             '& .MuiOutlinedInput-root': {
               '& fieldset': {
-                borderColor: state.theme === 'dark' ? '#666' : '#ccc', // Border color based on theme
+                borderColor: state.theme === 'dark' ? '#666' : '#ccc',
               },
               '&:hover fieldset': {
-                borderColor: state.theme === 'dark' ? '#fff' : '#000', // Border color on hover based on theme
+                borderColor: state.theme === 'dark' ? '#fff' : '#000',
               },
             },
           }}

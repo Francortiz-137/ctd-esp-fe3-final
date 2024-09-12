@@ -6,6 +6,7 @@ const Favs = () => {
   const { state } = useDentistStates();
   const [favDentists, setFavDentists] = useState([]);
 
+  // Obtener los favoritos desde localStorage
   useEffect(() => {
     const savedFavs = JSON.parse(localStorage.getItem('favs')) || [];
     setFavDentists(savedFavs);
