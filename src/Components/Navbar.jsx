@@ -1,34 +1,31 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { routes } from '../utils/routes';
-import { useDentistStates } from '../Components/utils/global.context';
-import { AppBar, Toolbar, Typography, Button, IconButton, Container, Menu, MenuItem } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button, IconButton, Container } from '@mui/material';
 import { LightMode, DarkMode, Menu as MenuIcon } from '@mui/icons-material';
+import { useDentistStates } from '../Components/utils/global.context';
+import NavBarDrawer from './NavBarDrawer'; // Importar el nuevo componente
+import Logo from './Logo';
 
 const Navbar = () => {
   const { state, dispatch } = useDentistStates();
-  const [anchorEl, setAnchorEl] = useState(null); // inicializamos como null para manejar la logica del menú
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   const toggleTheme = () => {
     dispatch({ type: 'TOGGLE_THEME' });
   };
 
-  const handleMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget); // Almacenamos el botón que abre el menú
-  };
-
-  const handleMenuClose = () => {
-    setAnchorEl(null); // Cerramos el menú
+  const handleDrawerToggle = () => {
+    setDrawerOpen(!drawerOpen);
   };
 
   return (
     <>
-      <AppBar 
-        position="sticky" 
-        sx={{ 
+      <AppBar
+        position="sticky"
+        sx={{
           backgroundColor: state.theme === 'light' ? '#f5f5f5' : '#1e1e1e',
           color: state.theme === 'light' ? '#000' : '#fff',
-          
+          height: '6vh',
         }}
       >
         <Toolbar>
@@ -39,83 +36,38 @@ const Navbar = () => {
               alignItems: 'center',
             }}
           >
-            <Typography variant="h6" component="div" sx={{ flexGrow: 1, display: 'flex', alignItems: 'center' }}>
-              <span style={{ color: 'red' }}>D</span><span>H</span>
-              <span style={{ fontWeight: '400', paddingLeft: '8px' }}>ODONTO</span>
-            </Typography>
+            <Logo/>
 
             <IconButton
               color="inherit"
               edge="start"
-              onClick={handleMenuOpen}
+              onClick={handleDrawerToggle}
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
               <MenuIcon />
             </IconButton>
+
             <Container sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <Button 
-                sx={{ color: state.theme === 'light' ? '#000' : '#fff' }} 
-                component={Link} 
-                to={routes.home}
-              >
+              <Button sx={{ color: state.theme === 'light' ? '#000' : '#fff' }} component={Link} to="/">
                 Home
               </Button>
-              <Button 
-                sx={{ color: state.theme === 'light' ? '#000' : '#fff' }} 
-                component={Link} 
-                to={routes.contact}
-              >
+              <Button sx={{ color: state.theme === 'light' ? '#000' : '#fff' }} component={Link} to="/contact">
                 Contact
               </Button>
-              <Button 
-                sx={{ color: state.theme === 'light' ? '#000' : '#fff' }} 
-                component={Link} 
-                to={routes.favs}
-              >
+              <Button sx={{ color: state.theme === 'light' ? '#000' : '#fff' }} component={Link} to="/favs">
                 Favs
               </Button>
             </Container>
+
             <IconButton color="inherit" onClick={toggleTheme} sx={{ ml: 2 }}>
               {state.theme === 'light' ? <DarkMode /> : <LightMode />}
             </IconButton>
           </Container>
         </Toolbar>
       </AppBar>
-      <Menu
-        anchorEl={anchorEl} // Usamos el botón como anclaje
-        open={Boolean(anchorEl)} // El menú abre si hay un anchorEl
-        onClose={handleMenuClose}
-        slotProps={{
-          paper: {
-            sx: {
-              bgcolor: state.theme === 'light' ? '#ffffff' : '#1e1e1e',
-              color: state.theme === 'light' ? '#000000' : '#ffffff',
-              border: `1px solid ${state.theme === 'light' ? '#e0e0e0' : '#333333'}`,
-              boxShadow: state.theme === 'light'
-                ? '0px 4px 8px rgba(0, 0, 0, 0.2)'
-                : '0px 4px 8px rgba(0, 0, 0, 0.5)',
-            },
-          },
-        }}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-      >
-        <MenuItem component={Link} to={routes.home} onClick={handleMenuClose} sx={{ color: state.theme === 'light' ? '#000' : '#fff' }}>
-          Home
-        </MenuItem>
-        <MenuItem component={Link} to={routes.contact} onClick={handleMenuClose} sx={{ color: state.theme === 'light' ? '#000' : '#fff' }}>
-          Contact
-        </MenuItem>
-        <MenuItem component={Link} to={routes.favs} onClick={handleMenuClose} sx={{ color: state.theme === 'light' ? '#000' : '#fff' }}>
-          Favs
-        </MenuItem>
-      </Menu>
+
+      {/* Render del Drawer desde el lado */}
+      <NavBarDrawer open={drawerOpen} onClose={handleDrawerToggle} />
     </>
   );
 };

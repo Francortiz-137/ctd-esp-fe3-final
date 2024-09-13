@@ -1,13 +1,7 @@
 import React, { createContext, useReducer, useMemo, useEffect, useContext } from 'react';
 import axios from 'axios';
-import { actionTypes, reducer } from '../../reducers/reducer';
+import { actionTypes, initialState, reducer } from '../../reducers/reducer';
 
-// Estado inicial del contexto
-export const initialState = {
-    theme: 'light', // Tema inicial
-    data: [], // Información traída de la API
-    favs: [], // Estado para los favoritos
-  };
 
 // Crear el contexto global
 export const GlobalContext = createContext({});
