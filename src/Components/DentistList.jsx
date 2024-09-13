@@ -96,7 +96,8 @@ const DentistList = ({ title, dentists, isLoading, noResults }) => {
                 maxWidth: '1000px' 
               }}
             >
-              {dentists.map((dentist) => (
+              { //Si no esta cargando y no hay errores mapea los dentistas
+              dentists.map((dentist) => (
                 <Grid
                   size={{ xs: 12, sm: 6, md: 4 }}
                   key={dentist.id}

@@ -36,7 +36,7 @@ const Detail = () => {
       sx={{
         backgroundColor: theme.palette.background.default,
         color: theme.palette.text.primary,
-        minHeight: '85vh',
+        minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
@@ -55,6 +55,7 @@ const Detail = () => {
         }}
       >
         {loading ? (
+          // Mientras loading sea true muestra un mensaje de loading
           <Typography
             variant="h5"
             component="p"
@@ -68,6 +69,7 @@ const Detail = () => {
           </Typography>
         ) : (
           dentist && (
+            // Si termina de cargar y no hay error muestra los datos del dentista
             <>
               <Typography variant="h4" component="h1" gutterBottom>
                 Detail Dentist {id}

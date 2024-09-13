@@ -46,8 +46,8 @@ const Form = ({ onSubmitSuccess }) => {
       p={3}
       boxShadow={3}
       borderRadius={2}
-      bgcolor={theme.palette.background.paper} // Color de fondo del formulario
-      color={theme.palette.text.primary} // Color del texto del formulario
+      bgcolor={theme.palette.background.paper}
+      color={theme.palette.text.primary}
     >
       <Typography variant="h4" component="h1" gutterBottom>
         Contacto
