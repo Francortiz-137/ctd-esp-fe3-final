@@ -7,21 +7,19 @@ import { LightMode, DarkMode, Menu as MenuIcon } from '@mui/icons-material';
 
 const Navbar = () => {
   const { state, dispatch } = useDentistStates();
-  const [anchorEl, setAnchorEl] = useState(null);
+  const [anchorEl, setAnchorEl] = useState(null); // inicializamos como null para manejar la logica del menú
 
   const toggleTheme = () => {
     dispatch({ type: 'TOGGLE_THEME' });
   };
 
   const handleMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
+    setAnchorEl(event.currentTarget); // Almacenamos el botón que abre el menú
   };
 
   const handleMenuClose = () => {
-    setAnchorEl(null);
+    setAnchorEl(null); // Cerramos el menú
   };
-
-  const open = Boolean(anchorEl);
 
   return (
     <>
@@ -30,7 +28,7 @@ const Navbar = () => {
         sx={{ 
           backgroundColor: state.theme === 'light' ? '#f5f5f5' : '#1e1e1e',
           color: state.theme === 'light' ? '#000' : '#fff',
-          height: '6vh',
+          
         }}
       >
         <Toolbar>
@@ -84,18 +82,20 @@ const Navbar = () => {
         </Toolbar>
       </AppBar>
       <Menu
-        anchorEl={anchorEl}
-        open={Boolean(anchorEl)}
+        anchorEl={anchorEl} // Usamos el botón como anclaje
+        open={Boolean(anchorEl)} // El menú abre si hay un anchorEl
         onClose={handleMenuClose}
-        PaperProps={{
-          sx: {
-            bgcolor: state.theme === 'light' ? '#ffffff' : '#1e1e1e',
-            color: state.theme === 'light' ? '#000000' : '#ffffff',
-            border: `1px solid ${state.theme === 'light' ? '#e0e0e0' : '#333333'}`,
-            boxShadow: state.theme === 'light'
-              ? '0px 4px 8px rgba(0, 0, 0, 0.2)'
-              : '0px 4px 8px rgba(0, 0, 0, 0.5)',
-          }
+        slotProps={{
+          paper: {
+            sx: {
+              bgcolor: state.theme === 'light' ? '#ffffff' : '#1e1e1e',
+              color: state.theme === 'light' ? '#000000' : '#ffffff',
+              border: `1px solid ${state.theme === 'light' ? '#e0e0e0' : '#333333'}`,
+              boxShadow: state.theme === 'light'
+                ? '0px 4px 8px rgba(0, 0, 0, 0.2)'
+                : '0px 4px 8px rgba(0, 0, 0, 0.5)',
+            },
+          },
         }}
         anchorOrigin={{
           vertical: 'bottom',

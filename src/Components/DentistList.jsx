@@ -39,7 +39,8 @@ const DentistList = ({ title, dentists, style }) => {
         rowSpacing={4}
         columnSpacing={{ xs: 1, sm: 2, md: 3 }}
         sx={{
-          justifyContent: 'center',
+          justifyContent: 'flex-start',
+          maxWidth: '1200px'
         }}
       >
         {// mapeamos la informacion de los dentistas en su card correspondiente
