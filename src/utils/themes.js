@@ -24,6 +24,10 @@ export const lightTheme = createTheme({
       backgroundColor: '#fff',
       color: '#000',
     },
+    card: {
+      backgroundColor: '#fff',
+      color: '#000',
+    },
     paper: {
       backgroundColor: '#fff',
       color: '#000',
@@ -57,6 +61,10 @@ export const darkTheme = createTheme({
     },
     footer: {
       backgroundColor: '#212121',
+      color: '#e0e0e0',
+    },
+    card: {
+      backgroundColor: '#111111',
       color: '#e0e0e0',
     },
     paper: {

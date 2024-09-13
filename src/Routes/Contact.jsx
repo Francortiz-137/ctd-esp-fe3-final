@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useTheme } from '@mui/material/styles';
 import Form from '../Components/Form';
 import Grid from '@mui/material/Grid2';
-import { Typography, Box } from '@mui/material';
+import { Typography } from '@mui/material';
 
 const Contact = () => {
   const theme = useTheme();

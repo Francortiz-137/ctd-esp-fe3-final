@@ -1,15 +1,18 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { Box, Typography, TextField, Button, useTheme } from '@mui/material';
-import { useDentistStates } from '../Components/utils/global.context';
 
 const Form = ({ onSubmitSuccess }) => {
-  const { state } = useDentistStates();
-  const theme = useTheme(); // Obtener el tema actual
+  const theme = useTheme();
   const [formData, setFormData] = useState({ name: '', email: '' });
   const [errors, setErrors] = useState({ name: '', email: '' });
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    /* 
+    actualiza solo el campo del formulario cuyo name coincide con el campo que se modificó
+    Si el input de name cambia, actualizará el valor del name dentro de formData.
+    Si el input de email cambia, actualizará solo el valor del email
+    */
     setFormData({ ...formData, [name]: value });
   };
 
