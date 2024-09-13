@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { AppBar, Toolbar, Typography, Button, IconButton, Container } from '@mui/material';
+import { AppBar, Toolbar, Button, IconButton, Container } from '@mui/material';
 import { LightMode, DarkMode, Menu as MenuIcon } from '@mui/icons-material';
+import { useTheme } from '@mui/material/styles';
 import { useDentistStates } from '../Components/utils/global.context';
-import NavBarDrawer from './NavBarDrawer'; // Importar el nuevo componente
+import NavBarDrawer from './NavBarDrawer';
 import Logo from './Logo';
 
 const Navbar = () => {
   const { state, dispatch } = useDentistStates();
   const [drawerOpen, setDrawerOpen] = useState(false);
-
+  const theme = useTheme();
+  
   const toggleTheme = () => {
     dispatch({ type: 'TOGGLE_THEME' });
   };
@@ -22,10 +24,9 @@ const Navbar = () => {
     <>
       <AppBar
         position="sticky"
-        
         sx={{
-          backgroundColor: state.theme === 'light' ? '#f5f5f5' : '#1e1e1e',
-          color: state.theme === 'light' ? '#000' : '#fff',
+          backgroundColor: theme.palette.navbar.backgroundColor,
+          color: theme.palette.navbar.color,
         }}
       >
         <Toolbar>
@@ -36,7 +37,7 @@ const Navbar = () => {
               alignItems: 'center',
             }}
           >
-            <Logo/>
+            <Logo />
 
             <IconButton
               color="inherit"
@@ -48,25 +49,40 @@ const Navbar = () => {
             </IconButton>
 
             <Container sx={{ display: { xs: 'none', md: 'flex' } }}>
-              <Button sx={{ color: state.theme === 'light' ? '#000' : '#fff' }} component={Link} to="/">
+              <Button
+                sx={{ color: theme.palette.navbar.color }}
+                component={Link}
+                to="/"
+              >
                 Home
               </Button>
-              <Button sx={{ color: state.theme === 'light' ? '#000' : '#fff' }} component={Link} to="/contact">
+              <Button
+                sx={{ color: theme.palette.navbar.color }}
+                component={Link}
+                to="/contact"
+              >
                 Contact
               </Button>
-              <Button sx={{ color: state.theme === 'light' ? '#000' : '#fff' }} component={Link} to="/favs">
+              <Button
+                sx={{ color: theme.palette.navbar.color }} 
+                component={Link}
+                to="/favs"
+              >
                 Favs
               </Button>
             </Container>
 
-            <IconButton color="inherit" onClick={toggleTheme} sx={{ ml: 2 }}>
+            <IconButton
+              color="inherit"
+              onClick={toggleTheme}
+              sx={{ ml: 2 }}
+            >
               {state.theme === 'light' ? <DarkMode /> : <LightMode />}
             </IconButton>
           </Container>
         </Toolbar>
       </AppBar>
 
-      {/* Render del Drawer desde el lado */}
       <NavBarDrawer open={drawerOpen} onClose={handleDrawerToggle} />
     </>
   );

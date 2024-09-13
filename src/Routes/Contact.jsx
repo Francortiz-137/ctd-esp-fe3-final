@@ -1,11 +1,11 @@
 import { useState } from 'react';
-import { useDentistStates } from '../Components/utils/global.context';
-import Form from '../Components/Form'; 
+import { useTheme } from '@mui/material/styles'; // Importar useTheme para acceder a los colores del tema
+import Form from '../Components/Form';
 import Grid from '@mui/material/Grid2';
 import { Typography, Box } from '@mui/material';
 
 const Contact = () => {
-  const { state } = useDentistStates();
+  const theme = useTheme(); // Obtener el tema actual
   const [successMessage, setSuccessMessage] = useState('');
 
   const handleFormSubmitSuccess = (message) => {
@@ -17,13 +17,13 @@ const Contact = () => {
       container
       justifyContent="center"
       alignItems="center"
-      style={{
-        minHeight: '85vh', 
-        backgroundColor: state.theme === 'light' ? '#f5f5f5' : '#333',
+      sx={{
+        minHeight: '100vh', 
+        backgroundColor: theme.palette.background.default,
       }}
     >
       <Grid 
-        size={{xs:12, sm:8, md:6}} 
+        size={{ xs: 12, sm: 8, md: 6 }} 
         sx={{ 
           px: { xs: 2, sm: 0 },
         }}
@@ -32,7 +32,7 @@ const Contact = () => {
         {successMessage && (
           <Typography
             variant="body1"
-            color={state.theme === 'light' ? 'success.main' : 'success.light'}
+            color={theme.palette.success.main}
             mt={2}
           >
             {successMessage}

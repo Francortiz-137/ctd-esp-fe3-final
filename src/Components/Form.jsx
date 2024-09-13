@@ -1,9 +1,10 @@
-import { useState } from 'react';
-import { Box, Typography, TextField, Button } from '@mui/material';
+import React, { useState } from 'react';
+import { Box, Typography, TextField, Button, useTheme } from '@mui/material';
 import { useDentistStates } from '../Components/utils/global.context';
 
 const Form = ({ onSubmitSuccess }) => {
   const { state } = useDentistStates();
+  const theme = useTheme(); // Obtener el tema actual
   const [formData, setFormData] = useState({ name: '', email: '' });
   const [errors, setErrors] = useState({ name: '', email: '' });
 
@@ -45,8 +46,8 @@ const Form = ({ onSubmitSuccess }) => {
       p={3}
       boxShadow={3}
       borderRadius={2}
-      bgcolor={state.theme === 'dark' ? '#424242' : '#fff'}
-      color={state.theme === 'dark' ? '#fff' : '#000'}
+      bgcolor={theme.palette.background.paper} // Color de fondo del formulario
+      color={theme.palette.text.primary} // Color del texto del formulario
     >
       <Typography variant="h4" component="h1" gutterBottom>
         Contacto
@@ -63,17 +64,17 @@ const Form = ({ onSubmitSuccess }) => {
           margin="normal"
           sx={{
             '& .MuiInputBase-root': {
-              color: state.theme === 'dark' ? '#fff' : '#000',
+              color: theme.palette.text.primary,
             },
             '& .MuiFormLabel-root': {
-              color: state.theme === 'dark' ? '#aaa' : '#555',
+              color: theme.palette.text.secondary,
             },
             '& .MuiOutlinedInput-root': {
               '& fieldset': {
-                borderColor: state.theme === 'dark' ? '#666' : '#ccc',
+                borderColor: theme.palette.divider,
               },
               '&:hover fieldset': {
-                borderColor: state.theme === 'dark' ? '#fff' : '#000',
+                borderColor: theme.palette.text.primary,
               },
             },
           }}
@@ -89,17 +90,17 @@ const Form = ({ onSubmitSuccess }) => {
           margin="normal"
           sx={{
             '& .MuiInputBase-root': {
-              color: state.theme === 'dark' ? '#fff' : '#000',
+              color: theme.palette.text.primary,
             },
             '& .MuiFormLabel-root': {
-              color: state.theme === 'dark' ? '#aaa' : '#555',
+              color: theme.palette.text.secondary,
             },
             '& .MuiOutlinedInput-root': {
               '& fieldset': {
-                borderColor: state.theme === 'dark' ? '#666' : '#ccc',
+                borderColor: theme.palette.divider,
               },
               '&:hover fieldset': {
-                borderColor: state.theme === 'dark' ? '#fff' : '#000',
+                borderColor: theme.palette.text.primary,
               },
             },
           }}
@@ -107,12 +108,12 @@ const Form = ({ onSubmitSuccess }) => {
         <Button
           type="submit"
           variant="contained"
-          color={state.theme === 'dark' ? 'secondary' : 'primary'} 
+          color="primary"
           sx={{
             mt: 2,
-            bgcolor: state.theme === 'dark' ? '#ff5722' : '#3f51b5', 
+            bgcolor: theme.palette.primary.main, 
             '&:hover': {
-              bgcolor: state.theme === 'dark' ? '#e64a19' : '#303f9f',
+              bgcolor: theme.palette.primary.dark,
             },
           }}
         >

@@ -7,10 +7,19 @@ import Favs from "./Routes/Favs";
 import { routes } from "./utils/routes";
 import Error from "./Routes/Error";
 import Layout from "./Layouts/Layout";
+import { useDentistStates } from "./Components/utils/global.context";
+import { darkTheme, lightTheme } from "./utils/themes";
+import { ThemeProvider } from "@mui/material";
 
 function App() {
+  // Globalmente se aplica el tema dependiendo del estado en el contexto
+  // Asi no tenemos que validarlo en cada componente
+  const { state } = useDentistStates();
+  const appliedTheme = state.theme === 'light' ? lightTheme : darkTheme;
+  
   return (
     <>
+    <ThemeProvider theme={appliedTheme}>
     <Routes>
       <Route path="/" element={<Layout/>}>
         <Route path={routes.home} element={<Home/>}/>
@@ -20,9 +29,8 @@ function App() {
         <Route path={routes.notFound} element={<Error/>}/>
       </Route>
     </Routes>
-    </>
-    
-    
+    </ThemeProvider>
+    </> 
   );
 }
 

@@ -2,26 +2,25 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import { Typography, Paper, Box } from '@mui/material';
-import { useDentistStates } from '../Components/utils/global.context';
+import { useTheme } from '@mui/material/styles';
 
 const Detail = () => {
   const { id } = useParams();
-  const { state } = useDentistStates(); // estado traido del contexto para manejar el tema
+  const theme = useTheme(); // Obtener el tema actual
   const [dentist, setDentist] = useState({});
-  const [error, setError] = useState(''); // estado para manejar los errores
+  const [error, setError] = useState(''); // Estado para manejar los errores
   const [loading, setLoading] = useState(true); // Nuevo estado para controlar el loading
   const url = `https://jsonplaceholder.typicode.com/users/${id}`;
 
   // Consumiendo el parámetro dinámico de la URL, se hará un fetch a un usuario específico
   useEffect(() => {
-
     setLoading(true);
     // Obtener data desde la API
     axios.get(url)
       .then(response => {
         setDentist(response.data);
         setError('');
-        // desactivar la carga despues de 2 seg
+        // Desactivar la carga después de 2 seg
         setTimeout(() => setLoading(false), 2000);
       })
       .catch(error => {
@@ -31,12 +30,12 @@ const Detail = () => {
         console.error(error);
       });
   }, [id]);
-  
+
   return (
-  <Box
+    <Box
       sx={{
-        backgroundColor: state.theme === 'light' ? '#f5f5f5' : '#333',
-        color: state.theme === 'light' ? '#000' : '#fff',
+        backgroundColor: theme.palette.background.default,
+        color: theme.palette.text.primary,
         minHeight: '85vh',
         display: 'flex',
         alignItems: 'center',
@@ -50,8 +49,8 @@ const Detail = () => {
           padding: 3,
           borderRadius: 2,
           boxShadow: 3,
-          backgroundColor: state.theme === 'light' ? '#fff' : '#424242',
-          color: state.theme === 'light' ? '#000' : '#fff',
+          backgroundColor: theme.palette.paper.backgroundColor,
+          color: theme.palette.paper.color,
           width: { xs: '90%', sm: '80%', md: '60%' },
         }}
       >
@@ -59,13 +58,13 @@ const Detail = () => {
           <Typography
             variant="h5"
             component="p"
-            sx={{ color: state.theme === 'light' ? '#000' : '#fff' }}
+            sx={{ color: theme.palette.text.primary }}
           >
             Loading...
           </Typography>
         ) : error ? (
           <Typography variant="h5" component="p" color="error">
-            {error}
+            {error} {/* Mostrar mensaje de error si ocurre */}
           </Typography>
         ) : (
           dentist && (
@@ -88,7 +87,7 @@ const Detail = () => {
                     href={`http://${dentist.website}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    style={{ color: state.theme === 'light' ? '#1e88e5' : '#bbdefb' }}
+                    style={{ color: theme.palette.primary.main }}
                   >
                     {dentist.website}
                   </a>
@@ -100,6 +99,6 @@ const Detail = () => {
       </Paper>
     </Box>
   );
-}
+};
 
 export default Detail;

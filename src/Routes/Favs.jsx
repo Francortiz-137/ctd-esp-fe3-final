@@ -27,10 +27,6 @@ const Favs = () => {
         dentists={favDentists}
         isLoading={isLoading}
         noResults={noResultMsg}
-        style={{
-          backgroundColor: state.theme === 'light' ? '#f0f0f0' : '#333',
-          color: state.theme === 'light' ? '#000' : '#fff'
-        }}
       />
   );
 };

@@ -3,9 +3,11 @@ import { useDentistStates } from '../Components/utils/global.context';
 import DentistList from '../Components/DentistList';
 
 const Home = () => {
+  //traemos los datos desde el contexto
   const { state } = useDentistStates();
   const [isLoading, setIsLoading] = useState(true);
   const [dentists, setDentists] = useState([]);
+  const noResultMsg = "No hay resultados 😥";
 
   useEffect(() => {
     // cargar los datos pasados 1 segundo para mostrar el skeleton
@@ -23,10 +25,7 @@ const Home = () => {
       title="Our Dentists"
       dentists={dentists}
       isLoading={isLoading}
-      style={{
-        backgroundColor: state.theme === 'light' ? '#f0f0f0' : '#333',
-        color: state.theme === 'light' ? '#000' : '#fff'
-      }}
+      noResults={noResultMsg}
     />
   );
 };

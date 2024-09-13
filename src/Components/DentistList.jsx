@@ -3,12 +3,13 @@ import Grid from '@mui/material/Grid2';
 import { Typography, Paper } from '@mui/material';
 import Card from './Card'; 
 import CardSkeleton from './CardSkeleton';
-import { useDentistStates } from '../Components/utils/global.context'; // Asegúrate de importar el contexto
+import { useTheme } from '@mui/material/styles';
 
-const DentistList = ({ title, dentists, isLoading, style, noResults }) => {
-  const { state } = useDentistStates(); // Obtener el estado del tema desde el contexto
-  const paperBackgroundColor = state.theme === 'light' ? '#f5f5f5' : '#424242'; // Color de fondo del Paper
-  const textColor = state.theme === 'light' ? '#000' : '#fff'; // Color del texto
+const DentistList = ({ title, dentists, isLoading, noResults }) => {
+  const theme = useTheme();
+  
+  const paperBackgroundColor = theme.palette.paper.backgroundColor;
+  const textColor = theme.palette.paper.color;
 
   return (
     <Grid
@@ -19,8 +20,8 @@ const DentistList = ({ title, dentists, isLoading, style, noResults }) => {
       sx={{
         minHeight: '100vh', 
         padding: '20px',
-        backgroundColor: style.backgroundColor,
-        color: style.color,
+        backgroundColor: theme.palette.background.default,
+        color: theme.palette.text.primary,
         display: 'flex',
         alignItems: 'center',
       }}
@@ -77,9 +78,10 @@ const DentistList = ({ title, dentists, isLoading, style, noResults }) => {
                   maxWidth: '400px',
                   textAlign: 'center',
                   backgroundColor: paperBackgroundColor,
+                  color: textColor,
                 }}
               >
-                <Typography variant="h5" sx={{ color: textColor }}>
+                <Typography variant="h5">
                   {noResults}
                 </Typography>
               </Paper>

@@ -4,7 +4,6 @@ import { Link } from "react-router-dom";
 import { Button, Typography, Card as MuiCard, CardActions, CardContent, CardMedia, CardActionArea, Box, Skeleton } from '@mui/material';
 import StarIcon from '@mui/icons-material/Star';
 import StarBorderIcon from '@mui/icons-material/StarBorder';
-import CardSkeleton from './CardSkeleton';
 
 const Card = ({ dentist }) => {
   const { state, dispatch } = useDentistStates();

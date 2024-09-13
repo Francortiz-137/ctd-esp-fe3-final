@@ -2,19 +2,19 @@ import { Box, Typography, IconButton } from '@mui/material';
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import { useDentistStates } from './utils/global.context';
+import { useTheme } from '@mui/material/styles';
 
 const Footer = () => {
-  const { state } = useDentistStates();
+  const theme = useTheme();
 
   return (
     <Box
       component="footer"
       sx={{
-        backgroundColor: state.theme === 'dark' ? '#444' : '#fff',
-        color: state.theme === 'dark' ? '#fff' : '#000',
+        backgroundColor: theme.palette.footer.backgroundColor,
+        color: theme.palette.footer.color,
         display: 'flex',
-        flexDirection: { xs: 'column', sm: 'row' }, 
+        flexDirection: { xs: 'column', sm: 'row' },
         justifyContent: { xs: 'center', sm: 'space-between' },
         alignItems: 'center',
         padding: 2,
@@ -40,7 +40,7 @@ const Footer = () => {
           alt="DH-logo"
           sx={{
             width: 200,
-            filter: state.theme === 'dark' ? 'invert(0)' : 'invert(1)',
+            filter: theme.palette.mode === 'dark' ? 'invert(0)' : 'invert(1)',
           }}
         />
       </Box>
@@ -56,7 +56,7 @@ const Footer = () => {
         }}
       >
         <Typography variant="body2" sx={{ marginX: 2 }}>
-        © 2024 Franco Ortiz.
+          © 2024 Franco Ortiz.
         </Typography>
       </Box>
 
@@ -68,13 +68,28 @@ const Footer = () => {
           mt: { xs: 2, sm: 0 },
         }}
       >
-        <IconButton color="inherit" href="https://facebook.com">
+        <IconButton
+          sx={{
+            color: theme.palette.text.primary,
+          }}
+          href="https://facebook.com"
+        >
           <FacebookIcon />
         </IconButton>
-        <IconButton color="inherit" href="https://instagram.com">
+        <IconButton
+          sx={{
+            color: theme.palette.text.primary,
+          }}
+          href="https://instagram.com"
+        >
           <InstagramIcon />
         </IconButton>
-        <IconButton color="inherit" href="https://whatsapp.com">
+        <IconButton
+          sx={{
+            color: theme.palette.text.primary,
+          }}
+          href="https://whatsapp.com"
+        >
           <WhatsAppIcon />
         </IconButton>
       </Box>
