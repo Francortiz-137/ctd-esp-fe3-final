@@ -6,6 +6,7 @@ const Favs = () => {
   const { state } = useDentistStates();
   const [favDentists, setFavDentists] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const noResultMsg = "No hay favoritos 😥";
 
   // Obtener los favoritos desde localStorage
   useEffect(() => {
@@ -20,18 +21,17 @@ const Favs = () => {
     return () => clearTimeout(timer);
   }, [state.data]);
 
-
   return (
-    /*como la estructura se comparte con Home se crea un nuevo componente */
-    <DentistList
-      title="Favorite Dentists"
-      dentists={favDentists}
-      isLoading={isLoading}
-      style={{
-        backgroundColor: state.theme === 'light' ? '#f0f0f0' : '#333',
-        color: state.theme === 'light' ? '#000' : '#fff'
-      }}
-    />
+      <DentistList
+        title="Favorite Dentists"
+        dentists={favDentists}
+        isLoading={isLoading}
+        noResults={noResultMsg}
+        style={{
+          backgroundColor: state.theme === 'light' ? '#f0f0f0' : '#333',
+          color: state.theme === 'light' ? '#000' : '#fff'
+        }}
+      />
   );
 };
 

@@ -1,10 +1,15 @@
 import React from 'react';
 import Grid from '@mui/material/Grid2';
-import { Typography } from '@mui/material';
+import { Typography, Paper } from '@mui/material';
 import Card from './Card'; 
-import CardSkeleton from './CardSkeleton'; // Asegúrate de tener un componente de Skeleton
+import CardSkeleton from './CardSkeleton';
+import { useDentistStates } from '../Components/utils/global.context'; // Asegúrate de importar el contexto
 
-const DentistList = ({ title, dentists, isLoading, style }) => {
+const DentistList = ({ title, dentists, isLoading, style, noResults }) => {
+  const { state } = useDentistStates(); // Obtener el estado del tema desde el contexto
+  const paperBackgroundColor = state.theme === 'light' ? '#f5f5f5' : '#424242'; // Color de fondo del Paper
+  const textColor = state.theme === 'light' ? '#000' : '#fff'; // Color del texto
+
   return (
     <Grid
       container
@@ -12,7 +17,7 @@ const DentistList = ({ title, dentists, isLoading, style }) => {
       justifyContent="flex-start"
       spacing={2}
       sx={{
-        minHeight: '85vh', 
+        minHeight: '100vh', 
         padding: '20px',
         backgroundColor: style.backgroundColor,
         color: style.color,
@@ -37,70 +42,70 @@ const DentistList = ({ title, dentists, isLoading, style }) => {
       </Grid>
 
       {isLoading ? (
-        // Si esta cargando, muestra un skeleton en lugar de los dentistas
+        // Si está cargando, muestra skeletons en lugar de dentistas
         <Grid
           container
           rowSpacing={4}
           columnSpacing={{ xs: 1, sm: 2, md: 3 }}
           sx={{ justifyContent: 'flex-start', maxWidth: '1000px' }}
         >
-          <Grid
-            size={{ xs: 12, sm: 6, md: 4 }}
-            sx={{ display: 'flex', justifyContent: 'center' , minWidth: '290px'}}
-          >
-            <CardSkeleton />
-          </Grid>
-          <Grid
-            size={{ xs: 12, sm: 6, md: 4 }}
-            sx={{ display: 'flex', justifyContent: 'center' , minWidth: '290px'}}
-          >
-            <CardSkeleton />
-          </Grid>
-          <Grid
-            size={{ xs: 12, sm: 6, md: 4 }}
-            sx={{ display: 'flex', justifyContent: 'center' , minWidth: '290px'}}
-          >
-            <CardSkeleton />
-          </Grid>
-          <Grid
-            size={{ xs: 12, sm: 6, md: 4 }}
-            sx={{ display: 'flex', justifyContent: 'center' , minWidth: '290px'}}
-          >
-            <CardSkeleton />
-          </Grid>
-          <Grid
-            size={{ xs: 12, sm: 6, md: 4 }}
-            sx={{ display: 'flex', justifyContent: 'center' , minWidth: '290px'}}
-          >
-            <CardSkeleton />
-          </Grid>
-          <Grid
-            size={{ xs: 12, sm: 6, md: 4 }}
-            sx={{ display: 'flex', justifyContent: 'center' , minWidth: '290px'}}
-          >
-            <CardSkeleton />
-          </Grid>
-        </Grid>
-      ) : (
-        <Grid
-          container
-          rowSpacing={4}
-          columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-          sx={{ 
-            justifyContent: dentists.length === 1 ? 'center' : 'flex-start', 
-            maxWidth: '1000px' 
-          }}
-        >
-          {dentists.map((dentist) => (
+          {Array.from(new Array(6)).map((_, index) => (
             <Grid
               size={{ xs: 12, sm: 6, md: 4 }}
-              key={dentist.id}
+              key={index}
               sx={{ display: 'flex', justifyContent: 'center', minWidth: '290px' }}
             >
-              <Card dentist={dentist} />
+              <CardSkeleton />
             </Grid>
           ))}
         </Grid>
+      ) : (
+        <>
+          {dentists.length === 0 && !isLoading ? (
+            // Mostrar mensaje si no hay resultados y no está cargando
+            <Grid
+              container
+              direction="column"
+              alignItems="center"
+              justifyContent="center"
+              sx={{ minHeight: '60vh', textAlign: 'center' }}
+            >
+              <Paper
+                elevation={3}
+                sx={{
+                  padding: '20px',
+                  maxWidth: '400px',
+                  textAlign: 'center',
+                  backgroundColor: paperBackgroundColor,
+                }}
+              >
+                <Typography variant="h5" sx={{ color: textColor }}>
+                  {noResults}
+                </Typography>
+              </Paper>
+            </Grid>
+          ) : (
+            <Grid
+              container
+              rowSpacing={4}
+              columnSpacing={{ xs: 1, sm: 2, md: 3 }}
+              sx={{ 
+                justifyContent: dentists.length === 1 ? 'center' : 'flex-start', 
+                maxWidth: '1000px' 
+              }}
+            >
+              {dentists.map((dentist) => (
+                <Grid
+                  size={{ xs: 12, sm: 6, md: 4 }}
+                  key={dentist.id}
+                  sx={{ display: 'flex', justifyContent: 'center', minWidth: '290px' }}
+                >
+                  <Card dentist={dentist} />
+                </Grid>
+              ))}
+            </Grid>
+          )}
+        </>
       )}
     </Grid>
   );
