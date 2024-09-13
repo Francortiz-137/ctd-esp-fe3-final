@@ -22,10 +22,10 @@ const Navbar = () => {
     <>
       <AppBar
         position="sticky"
+        
         sx={{
           backgroundColor: state.theme === 'light' ? '#f5f5f5' : '#1e1e1e',
           color: state.theme === 'light' ? '#000' : '#fff',
-          height: '6vh',
         }}
       >
         <Toolbar>

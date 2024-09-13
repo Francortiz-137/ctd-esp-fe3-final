@@ -48,6 +48,21 @@ const Footer = () => {
       <Box
         display="flex"
         flexDirection="row"
+        alignItems="center"
+        sx={{
+          mt: { xs: 2, sm: 0 },
+          mb: { xs: 2, sm: 0 },
+          textAlign: 'center',
+        }}
+      >
+        <Typography variant="body2" sx={{ marginX: 2 }}>
+        © 2024 Franco Ortiz.
+        </Typography>
+      </Box>
+
+      <Box
+        display="flex"
+        flexDirection="row"
         justifyContent="center"
         sx={{
           mt: { xs: 2, sm: 0 },
